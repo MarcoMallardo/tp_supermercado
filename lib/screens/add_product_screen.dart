@@ -63,23 +63,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
     totalPrice += price;
     productCount++;
 
-    final currentMostExpensive = mostExpensive;
-    if (currentMostExpensive == null || price > currentMostExpensive.price) {
+    if (mostExpensive == null || price > mostExpensive!.price) {
       mostExpensive = newProduct;
     }
 
-    final currentCheapest = cheapest;
-    if (currentCheapest == null || price < currentCheapest.price) {
+    if (cheapest == null || price < cheapest!.price) {
       cheapest = newProduct;
     }
 
-    final currentLargestQuantity = largestQuantity;
-    if (currentLargestQuantity == null || quantity > currentLargestQuantity.quantity) {
+    if (largestQuantity == null || quantity > largestQuantity!.quantity) {
       largestQuantity = newProduct;
     }
 
-    final currentSmallestQuantity = smallestQuantity;
-    if (currentSmallestQuantity == null || quantity < currentSmallestQuantity.quantity) {
+    if (smallestQuantity == null || quantity < smallestQuantity!.quantity) {
       smallestQuantity = newProduct;
     }
 
@@ -94,40 +90,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     );
   }
 
-  void goToResults() {
-    final mostExpensiveValue = mostExpensive;
-    final cheapestValue = cheapest;
-    final largestQuantityValue = largestQuantity;
-    final smallestQuantityValue = smallestQuantity;
 
-    if (productCount > 0 &&
-        mostExpensiveValue != null &&
-        cheapestValue != null &&
-        largestQuantityValue != null &&
-        smallestQuantityValue != null) {
-      final calcData = CalcData(
-        mostExpensive: mostExpensiveValue,
-        cheapest: cheapestValue,
-        largestQuantity: largestQuantityValue,
-        smallestQuantity: smallestQuantityValue,
-        averagePrice: totalPrice / productCount,
-      );
-      context.go('/calc', extra: calcData);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Debe ingresar al menos un producto')),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    descriptionController.dispose();
-    priceController.dispose();
-    quantityController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,103 +115,120 @@ class _AddProductScreenState extends State<AddProductScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 16),
-              // Campo de nombre
-              TextField(
-                controller: nameController,
-                decoration: InputDecoration(
-                  labelText: 'Nombre del Producto',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  prefixIcon: const Icon(Icons.shopping_bag),
-                ),
-              ),
-              const SizedBox(height: 16),
-              // Campo de descripción
-              TextField(
-                controller: descriptionController,
-                decoration: InputDecoration(
-                  labelText: 'Descripción',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  prefixIcon: const Icon(Icons.description),
-                ),
-                maxLines: 2,
-              ),
-              const SizedBox(height: 16),
-              // Campo de precio
-              TextField(
-                controller: priceController,
-                decoration: InputDecoration(
-                  labelText: 'Precio',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  prefixIcon: const Icon(Icons.attach_money),
-                ),
-                keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              ),
-              const SizedBox(height: 16),
-              // Campo de cantidad
-              TextField(
-                controller: quantityController,
-                decoration: InputDecoration(
-                  labelText: 'Cantidad',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  prefixIcon: const Icon(Icons.inventory_2),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 24),
-              // Botón para agregar producto
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: addProduct,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                // Campo de nombre
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    labelText: 'Nombre del Producto',
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  child: const Text(
-                    'Ingresar Producto',
-                    style: TextStyle(fontSize: 16),
+                    prefixIcon: const Icon(Icons.shopping_bag),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              // Botón para calcular
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ElevatedButton.icon(
-                  onPressed: goToResults,
-                  icon: const Icon(Icons.calculate),
-                  label: const Text(
-                    'Calcular',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    shape: RoundedRectangleBorder(
+                const SizedBox(height: 16),
+                // Campo de descripción
+                TextField(
+                  controller: descriptionController,
+                  decoration: InputDecoration(
+                    labelText: 'Descripción',
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
+                    ),
+                    prefixIcon: const Icon(Icons.description),
+                  ),
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 16),
+                // Campo de precio
+                TextField(
+                  controller: priceController,
+                  decoration: InputDecoration(
+                    labelText: 'Precio',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    prefixIcon: const Icon(Icons.attach_money),
+                  ),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                ),
+                const SizedBox(height: 16),
+                // Campo de cantidad
+                TextField(
+                  controller: quantityController,
+                  decoration: InputDecoration(
+                    labelText: 'Cantidad',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    prefixIcon: const Icon(Icons.inventory_2),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 24),
+                // Botón para agregar producto
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: addProduct,
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Ingresar Producto',
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16),
+                // Botón para calcular
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      if (productCount > 0) {
+                        final calcData = CalcData(
+                          mostExpensive: mostExpensive!,
+                          cheapest: cheapest!,
+                          largestQuantity: largestQuantity!,
+                          smallestQuantity: smallestQuantity!,
+                          averagePrice: totalPrice / productCount,
+                        );
+                        context.go('/calc', extra: calcData);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Debe ingresar al menos un producto')),
+                        );
+                      }
+                    },
+                    icon: const Icon(Icons.calculate),
+                    label: const Text(
+                      'Calcular',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

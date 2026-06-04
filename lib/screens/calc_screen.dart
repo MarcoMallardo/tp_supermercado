@@ -77,7 +77,6 @@ class _CalcScreenState extends State<CalcScreen> {
               Text('\$${calcData.averagePrice.toStringAsFixed(2)}',
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ],
-            const Spacer(),
             SizedBox(
               width: double.infinity,
               height: 48,
