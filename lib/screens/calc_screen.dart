@@ -17,10 +17,7 @@ class _CalcScreenState extends State<CalcScreen> {
     final CalcData? calcData = widget.calcData;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Resultados'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Resultados'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -74,8 +71,13 @@ class _CalcScreenState extends State<CalcScreen> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              Text('\$${calcData.averagePrice.toStringAsFixed(2)}',
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text(
+                '\$${calcData.averagePrice.toStringAsFixed(2)}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
             SizedBox(
               width: double.infinity,

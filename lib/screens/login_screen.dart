@@ -19,10 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Login'), centerTitle: true),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -31,16 +28,12 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo o título
                 const Text(
-                  'Supermercado TP',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  'Supermercado',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 60),
-                // Campo de usuario
+
                 TextField(
                   controller: usernameController,
                   decoration: InputDecoration(
@@ -52,7 +45,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                // Campo de contraseña
                 TextField(
                   controller: passwordController,
                   obscureText: true,
@@ -65,7 +57,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                // Botón de login
                 SizedBox(
                   width: double.infinity,
                   height: 48,
@@ -74,11 +65,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       final username = usernameController.text;
                       final password = passwordController.text;
 
-                      if (username == validUser.username && password == validUser.password) {
+                      if (username == validUser.username &&
+                          password == validUser.password) {
                         context.go('/addProduct');
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Usuario o contraseña incorrectos')),
+                          const SnackBar(
+                            content: Text('Usuario o contraseña incorrectos'),
+                          ),
                         );
                       }
                     },
@@ -91,16 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Ingresar',
                       style: TextStyle(fontSize: 16),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                // Texto informativo
-                const Text(
-                  'Usuario: admin\nContraseña: 1234',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
                   ),
                 ),
               ],

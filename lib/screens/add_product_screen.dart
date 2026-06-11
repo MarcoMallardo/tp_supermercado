@@ -37,7 +37,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
     double? price = double.tryParse(priceController.text);
     if (price == null || price < 0) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('El precio debe ser un número válido mayor a 0')),
+        const SnackBar(
+          content: Text('El precio debe ser un número válido mayor a 0'),
+        ),
       );
       return;
     }
@@ -46,7 +48,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
     int? quantity = int.tryParse(quantityController.text);
     if (quantity == null || quantity < 1) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('La cantidad debe ser un número entero mayor a 0')),
+        const SnackBar(
+          content: Text('La cantidad debe ser un número entero mayor a 0'),
+        ),
       );
       return;
     }
@@ -59,7 +63,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
       quantity: quantity,
     );
 
-    // Actualizar estadísticos sin usar listas
     totalPrice += price;
     productCount++;
 
@@ -79,7 +82,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
       smallestQuantity = newProduct;
     }
 
-    // Limpiar los campos
     nameController.clear();
     descriptionController.clear();
     priceController.clear();
@@ -89,8 +91,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
       const SnackBar(content: Text('Producto agregado exitosamente')),
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +157,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     prefixIcon: const Icon(Icons.attach_money),
                   ),
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 ),
                 const SizedBox(height: 16),
                 // Campo de cantidad
@@ -170,7 +169,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     prefixIcon: const Icon(Icons.inventory_2),
                   ),
-                  keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 24),
                 // Botón para agregar producto
@@ -208,7 +206,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         context.go('/calc', extra: calcData);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Debe ingresar al menos un producto')),
+                          const SnackBar(
+                            content: Text('Debe ingresar al menos un producto'),
+                          ),
                         );
                       }
                     },
@@ -218,7 +218,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       style: TextStyle(fontSize: 16),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
